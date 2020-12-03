@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Roommates.Repositories;
+using Roommates.UI;
 
 namespace Roommates
 {
@@ -11,6 +13,8 @@ namespace Roommates
 
         static void Main(string[] args)
         {
+            RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
+
             bool runProgram = true;
             while (runProgram)
             {
@@ -18,8 +22,8 @@ namespace Roommates
 
                 switch (selection)
                 {
-                    case ("Show all rooms"):
-                        // Do stuff
+                    case ("Show all rooms"):                   
+                        MainMenu.ShowAllRooms(roomRepo.GetAll());
                         break;
                     case ("Search for room"):
                         // Do stuff
