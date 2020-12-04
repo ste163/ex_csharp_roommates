@@ -28,7 +28,7 @@ namespace Roommates
                         MainMenu.ShowAll(roomRepo.GetAll());
                         break;
                     case ("Search for room"):
-                        MainMenu.SearchForRoom(roomRepo);
+                        MainMenu.SearchById(roomRepo);
                         break;
                     case ("Add room"):
                         MainMenu.AddRoom(roomRepo);
@@ -37,7 +37,7 @@ namespace Roommates
                         MainMenu.ShowAll(choreRepo.GetAll());
                         break;
                     case ("Search for chore"):
-
+                        MainMenu.SearchById(choreRepo);
                         break;
                     case ("Add chore"):
 

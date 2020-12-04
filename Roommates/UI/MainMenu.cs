@@ -45,12 +45,19 @@ namespace Roommates.UI
             "Add room",
             "Show all chores",
             "Search for chore",
-            "Add chore",
+            "Add chore [NOT ADDED]",
+            "Show all roommates [NOT ADDED]",
+            "Search for roommate [NOT ADDED]",
+            "Add roommate [NOT ADDED]",
             "Exit"
         };
 
             for (int i = 0; i < options.Count; i++)
             {
+                if (i == 0) Console.WriteLine("Rooms\n------");
+                if (i == 3) Console.WriteLine("\nChores\n------");
+                if (i == 6) Console.WriteLine("\nRoommates\n------");
+                if (i == options.Count - 1) Console.WriteLine(""); 
                 Console.WriteLine($"{i + 1}. {options[i]}");
             }
 
@@ -92,13 +99,13 @@ namespace Roommates.UI
             InputContinue();
         }
 
-        public static void SearchForRoom(RoomRepository roomRepo)
+        public static void SearchById(RoomRepository roomRepo)
         {
             Room room = null;
 
-            while(room == null)
+            while (room == null)
             {
-                Console.Write("Enter Room Id: ");
+                Console.Write("Enter Room ID: ");
                 int id = InputNumber();
 
                 room = roomRepo.GetById(id);
@@ -106,6 +113,23 @@ namespace Roommates.UI
             }
 
             Console.WriteLine($"{room.Id} - {room.Name} Max Occupancy: {room.MaxOccupancy}");
+            InputContinue();
+        }
+
+        public static void SearchById(ChoreRepository choreRepo)
+        {
+            Chore chore = null;
+
+            while (chore == null)
+            {
+                Console.Write("Enter Chore ID: ");
+                int id = InputNumber();
+
+                chore = choreRepo.GetById(id);
+                if (chore == null) Console.Write("No chore with that ID available. ");
+            }
+
+            Console.WriteLine($"{chore.Id} - {chore.Name}");
             InputContinue();
         }
 
