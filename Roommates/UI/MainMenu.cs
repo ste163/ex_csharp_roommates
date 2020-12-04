@@ -44,6 +44,26 @@ namespace Roommates.UI
             }
         }
 
+        public static int InputNumber()
+        {
+            int inputNumber;
+
+            while (true)
+            {
+                try
+                {
+                    inputNumber = int.Parse(Console.ReadLine());
+                    break;
+                }
+                catch (FormatException)
+                {
+                    Console.Write("Not a number. Must enter a number: ");
+                }
+            }
+
+            return inputNumber;
+        }
+
         public static void ShowAllRooms(List<Room> rooms)
         {
             foreach (Room r in rooms)
@@ -56,21 +76,12 @@ namespace Roommates.UI
 
         public static void SearchForRoom(RoomRepository roomRepo)
         {
-            int id;
             Room room = null;
 
             while(room == null)
             {
                 Console.Write("Enter Room Id: ");
-                try
-                {
-                    id = int.Parse(Console.ReadLine());
-                }
-                catch (FormatException)
-                {
-                    Console.Write("Not a number. Must enter a number: ");
-                    id = int.Parse(Console.ReadLine());
-                }
+                int id = InputNumber();
 
                 room = roomRepo.GetById(id);
                 if (room == null) Console.Write("No room with that ID available. ");
@@ -79,6 +90,15 @@ namespace Roommates.UI
             Console.WriteLine($"{room.Id} - {room.Name} Max Occupancy: {room.MaxOccupancy}");
             Console.Write("Press any key to continue");
             Console.ReadKey();
+        }
+
+        public static void AddRoom(RoomRepository roomRepo)
+        {
+            Console.WriteLine("Room name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Max occupancy: ");
+            int max = InputNumber();
         }
     }
 }
