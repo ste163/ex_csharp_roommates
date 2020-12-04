@@ -42,7 +42,10 @@ namespace Roommates.UI
         {
             "Show all rooms",
             "Search for room",
-            "Add a room",
+            "Add room",
+            "Show all chores",
+            "Search for chore",
+            "Add chore",
             "Exit"
         };
 
@@ -69,14 +72,24 @@ namespace Roommates.UI
             }
         }
 
-        public static void ShowAllRooms(List<Room> rooms)
+        // Overload for room list
+        public static void ShowAll(List<Room> rooms)
         {
             foreach (Room r in rooms)
             {
-                Console.WriteLine($"{r.Id} - {r.Name} Max Occupancy({r.MaxOccupancy})");
-            } 
-            Console.Write("Press any key to continue");
-            Console.ReadKey();
+                Console.WriteLine($"{r.Id} - {r.Name} - Max Occupancy: {r.MaxOccupancy}");
+            }
+            InputContinue();
+        }
+
+        // Overload for chore list
+        public static void ShowAll(List<Chore> chores)
+        {
+            foreach (Chore c in chores)
+            {
+                Console.WriteLine($"{c.Id} - {c.Name}");
+            }
+            InputContinue();
         }
 
         public static void SearchForRoom(RoomRepository roomRepo)

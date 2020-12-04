@@ -13,8 +13,9 @@ namespace Roommates
 
         static void Main(string[] args)
         {
-           // Get the connection string to allow our methods to use the database
-           RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
+            // Get the connection string to allow our methods to use the database
+            RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
+            ChoreRepository choreRepo = new ChoreRepository(CONNECTION_STRING);       
 
             bool runProgram = true;
             while (runProgram)
@@ -24,13 +25,22 @@ namespace Roommates
                 switch (selection)
                 {
                     case ("Show all rooms"):                   
-                        MainMenu.ShowAllRooms(roomRepo.GetAll());
+                        MainMenu.ShowAll(roomRepo.GetAll());
                         break;
                     case ("Search for room"):
                         MainMenu.SearchForRoom(roomRepo);
                         break;
-                    case ("Add a room"):
+                    case ("Add room"):
                         MainMenu.AddRoom(roomRepo);
+                        break;
+                    case ("Show all chores"):
+                        MainMenu.ShowAll(choreRepo.GetAll());
+                        break;
+                    case ("Search for chore"):
+
+                        break;
+                    case ("Add chore"):
+
                         break;
                     case ("Exit"):
                         runProgram = false;
