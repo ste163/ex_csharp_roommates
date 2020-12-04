@@ -8,15 +8,10 @@ namespace Roommates.Repositories
 {
     public class RoomRepository : BaseRepository
     {
-        /// <summary>
         ///  When new RoomRespository is instantiated, pass the connection string along to the BaseRepository
-        /// </summary>
         public RoomRepository(string connectionString) : base(connectionString) { }
 
-        // ...We'll add some methods shortly...
-        /// <summary>
         ///  Get a list of all Rooms in the database
-        /// </summary>
         public List<Room> GetAll()
         {
             //  We must "use" the database connection.
@@ -75,6 +70,38 @@ namespace Roommates.Repositories
 
                     // Return the list of rooms who whomever called this method.
                     return rooms;
+                }
+            }
+        }
+
+        ///  Returns a single room with the given id.
+        public Room GetById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT Name, MaxOccupancy FROM Room WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    Room room = null;
+
+                    // If we only expect a single row back from the database, we don't need a while loop.
+                    if (reader.Read())
+                    {
+                        room = new Room
+                        {
+                            Id = id,
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            MaxOccupancy = reader.GetInt32(reader.GetOrdinal("MaxOccupancy")),
+                        };
+                    }
+
+                    reader.Close();
+
+                    return room;
                 }
             }
         }

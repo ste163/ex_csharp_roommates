@@ -13,12 +13,13 @@ namespace Roommates
 
         static void Main(string[] args)
         {
-            RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
+           // Get the connection string to allow our methods to use the database
+           RoomRepository roomRepo = new RoomRepository(CONNECTION_STRING);
 
             bool runProgram = true;
             while (runProgram)
             {
-                string selection = GetMenuSelection();
+                string selection = MainMenu.GetSelections();
 
                 switch (selection)
                 {
@@ -26,7 +27,7 @@ namespace Roommates
                         MainMenu.ShowAllRooms(roomRepo.GetAll());
                         break;
                     case ("Search for room"):
-                        // Do stuff
+                        MainMenu.SearchForRoom();
                         break;
                     case ("Add a room"):
                         // Do stuff
@@ -34,43 +35,6 @@ namespace Roommates
                     case ("Exit"):
                         runProgram = false;
                         break;
-                }
-            }
-
-        }
-
-        static string GetMenuSelection()
-        {
-            Console.Clear();
-
-            List<string> options = new List<string>()
-        {
-            "Show all rooms",
-            "Search for room",
-            "Add a room",
-            "Exit"
-        };
-
-            for (int i = 0; i < options.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {options[i]}");
-            }
-
-            while (true)
-            {
-                try
-                {
-                    Console.WriteLine();
-                    Console.Write("Select an option > ");
-
-                    string input = Console.ReadLine();
-                    int index = int.Parse(input) - 1;
-                    return options[index];
-                }
-                catch (Exception)
-                {
-
-                    continue;
                 }
             }
         }
