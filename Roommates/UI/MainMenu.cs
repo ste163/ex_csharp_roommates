@@ -8,6 +8,32 @@ namespace Roommates.UI
 {
     public class MainMenu
     {
+        public static int InputNumber()
+        {
+            int inputNumber;
+
+            while (true)
+            {
+                try
+                {
+                    inputNumber = int.Parse(Console.ReadLine());
+                    break;
+                }
+                catch (FormatException)
+                {
+                    Console.Write("Not a number. Must enter a number: ");
+                }
+            }
+
+            return inputNumber;
+        }
+
+        public static void InputContinue()
+        {
+            Console.Write("Press any key to continue");
+            Console.ReadKey();
+        }
+
         public static string GetSelections()
         {
             Console.Clear();
@@ -38,30 +64,9 @@ namespace Roommates.UI
                 }
                 catch (Exception)
                 {
-
                     continue;
                 }
             }
-        }
-
-        public static int InputNumber()
-        {
-            int inputNumber;
-
-            while (true)
-            {
-                try
-                {
-                    inputNumber = int.Parse(Console.ReadLine());
-                    break;
-                }
-                catch (FormatException)
-                {
-                    Console.Write("Not a number. Must enter a number: ");
-                }
-            }
-
-            return inputNumber;
         }
 
         public static void ShowAllRooms(List<Room> rooms)
@@ -88,8 +93,7 @@ namespace Roommates.UI
             }
 
             Console.WriteLine($"{room.Id} - {room.Name} Max Occupancy: {room.MaxOccupancy}");
-            Console.Write("Press any key to continue");
-            Console.ReadKey();
+            InputContinue();
         }
 
         public static void AddRoom(RoomRepository roomRepo)
@@ -99,6 +103,17 @@ namespace Roommates.UI
 
             Console.Write("Max occupancy: ");
             int max = InputNumber();
+
+            Room roomToAdd = new Room()
+            {
+                Name = name,
+                MaxOccupancy = max
+            };
+
+            roomRepo.Insert(roomToAdd);
+
+            Console.WriteLine($"{roomToAdd.Name} has been added and assigned an ID of {roomToAdd.Id}");
+            InputContinue();
         }
     }
 }

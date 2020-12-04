@@ -30,7 +30,7 @@ namespace Roommates
                         MainMenu.SearchForRoom(roomRepo);
                         break;
                     case ("Add a room"):
-                        // Do stuff
+                        MainMenu.AddRoom(roomRepo);
                         break;
                     case ("Exit"):
                         runProgram = false;
