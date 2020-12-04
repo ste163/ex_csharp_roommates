@@ -122,7 +122,9 @@ namespace Roommates.Repositories
                     cmd.Parameters.AddWithValue("@name", room.Name);
                     cmd.Parameters.AddWithValue("@maxOccupancy", room.MaxOccupancy);
                     int id = (int)cmd.ExecuteScalar();
-                    // Even though this method doesn't return anything, it's still affecting the room object in memory
+                    // Even though this method doesn't return anything, we assign this room.Id so we can tell the user
+                    // in the next method that runs, to Console.WriteLine what the id for the created room is. If we left this statement
+                    // out, we wouldn't have a way to tell the user. Which may be what we want, depending on the situation.
                     room.Id = id;
                 }
             }

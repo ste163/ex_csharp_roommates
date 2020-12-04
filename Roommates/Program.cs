@@ -40,7 +40,7 @@ namespace Roommates
                         MainMenu.SearchById(choreRepo);
                         break;
                     case ("Add chore"):
-
+                        MainMenu.AddChore(choreRepo);
                         break;
                     case ("Exit"):
                         runProgram = false;

@@ -45,7 +45,7 @@ namespace Roommates.UI
             "Add room",
             "Show all chores",
             "Search for chore",
-            "Add chore [NOT ADDED]",
+            "Add chore",
             "Show all roommates [NOT ADDED]",
             "Search for roommate [NOT ADDED]",
             "Add roommate [NOT ADDED]",
@@ -135,7 +135,7 @@ namespace Roommates.UI
 
         public static void AddRoom(RoomRepository roomRepo)
         {
-            Console.WriteLine("Room name: ");
+            Console.Write("Room name: ");
             string name = Console.ReadLine();
 
             Console.Write("Max occupancy: ");
@@ -150,6 +150,22 @@ namespace Roommates.UI
             roomRepo.Insert(roomToAdd);
 
             Console.WriteLine($"{roomToAdd.Name} has been added and assigned an ID of {roomToAdd.Id}");
+            InputContinue();
+        }
+
+        public static void AddChore(ChoreRepository choreRepo)
+        {
+            Console.Write("Chore name: ");
+            string name = Console.ReadLine();
+
+            Chore choreToAdd = new Chore()
+            {
+                Name = name
+            };
+
+            choreRepo.Insert(choreToAdd);
+
+            Console.WriteLine($"{choreToAdd.Name} has been added and assigned an ID of {choreToAdd.Id}");
             InputContinue();
         }
     }
