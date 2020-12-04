@@ -99,38 +99,39 @@ namespace Roommates.UI
             InputContinue();
         }
 
+        // Overload for rooms
         public static void SearchById(RoomRepository roomRepo)
         {
             Room room = null;
-
-            while (room == null)
-            {
-                Console.Write("Enter Room ID: ");
-                int id = InputNumber();
-
-                room = roomRepo.GetById(id);
-                if (room == null) Console.Write("No room with that ID available. ");
-            }
+            room = (Room)GetObjById(room, roomRepo);
 
             Console.WriteLine($"{room.Id} - {room.Name} Max Occupancy: {room.MaxOccupancy}");
             InputContinue();
         }
 
+        // Overload for chores
         public static void SearchById(ChoreRepository choreRepo)
         {
             Chore chore = null;
-
-            while (chore == null)
-            {
-                Console.Write("Enter Chore ID: ");
-                int id = InputNumber();
-
-                chore = choreRepo.GetById(id);
-                if (chore == null) Console.Write("No chore with that ID available. ");
-            }
+            chore = (Chore)GetObjById(chore, choreRepo);
 
             Console.WriteLine($"{chore.Id} - {chore.Name}");
             InputContinue();
+        }
+
+        // Helper method to handle getting the specific object by id from a model
+        private static IModel GetObjById(IModel incomingObj, IRepository repo)
+        {
+            while (incomingObj == null)
+            {
+                Console.Write("Enter ID: ");
+                int id = InputNumber();
+
+                incomingObj = repo.GetById(id);
+                if (incomingObj == null) Console.Write("No item with that ID is available. ");
+            }
+
+            return incomingObj;
         }
 
         public static void AddRoom(RoomRepository roomRepo)

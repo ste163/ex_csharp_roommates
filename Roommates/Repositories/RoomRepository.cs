@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Roommates.Repositories
 {
-    public class RoomRepository : BaseRepository
+    public class RoomRepository : BaseRepository, IRepository
     {
         ///  When new RoomRespository is instantiated, pass the connection string along to the BaseRepository
         public RoomRepository(string connectionString) : base(connectionString) { }
@@ -75,7 +75,7 @@ namespace Roommates.Repositories
         }
 
         ///  Returns a single room with the given id.
-        public Room GetById(int id)
+        public IModel GetById(int id)
         {
             using (SqlConnection conn = Connection)
             {

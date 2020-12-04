@@ -6,7 +6,7 @@ using Roommates.Models;
 
 namespace Roommates.Repositories
 {
-    public class ChoreRepository : BaseRepository
+    public class ChoreRepository : BaseRepository, IRepository
     {
         // When we instantiate ChoreRepository, pass connection string from the base class into it
         public ChoreRepository(string connectionString) : base(connectionString) { }
@@ -53,7 +53,7 @@ namespace Roommates.Repositories
             }
         }
 
-        public Chore GetById(int id)
+        public IModel GetById(int id)
         {
             using (SqlConnection conn = Connection)
             {
